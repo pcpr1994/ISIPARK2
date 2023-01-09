@@ -1,0 +1,120 @@
+INSERT INTO Tipo_contacto (descricao) VALUES ("email");
+INSERT INTO Tipo_contacto (descricao) VALUES ("telemovel");
+INSERT INTO Tipo_contacto (descricao) VALUES ("telefone");
+INSERT INTO Tipo_contacto (descricao) VALUES ("fax");
+
+INSERT INTO tipo_utilizador (nome_tipo) VALUES ("Aluno");
+INSERT INTO tipo_utilizador (nome_tipo) VALUES ("Professor");
+INSERT INTO tipo_utilizador (nome_tipo) VALUES ("Funcionário");
+
+INSERT INTO Tipo_veiculos (descricao) VALUES ("normal");
+INSERT INTO Tipo_veiculos (descricao) VALUES ("eletrico");
+INSERT INTO Tipo_veiculos (descricao) VALUES ("mota");
+
+INSERT INTO setor (setor, total_lugares) VALUES ("A",120);
+INSERT INTO setor (setor, total_lugares) VALUES ("B",100);
+INSERT INTO setor (setor, total_lugares) VALUES ("C",80);
+
+INSERT INTO tipo_lugar (descricao) VALUES ("normal");
+INSERT INTO tipo_lugar (descricao) VALUES ("eletrico");
+INSERT INTO tipo_lugar (descricao) VALUES ("mota");
+INSERT INTO tipo_lugar (descricao) VALUES ("necessidades especiais");
+
+INSERT INTO Morada (rua, nPorta, cp4, cp3, localidade, cidade) VALUES ("Rua dos Anjos",26,4561,123,"Soutelo","Braga");
+INSERT INTO Morada (rua, nPorta, cp4, cp3, localidade, cidade) VALUES ("Rua do Raio",29,5362,233,"Covide","Bragança");
+INSERT INTO Morada (rua, nPorta, cp4, cp3, localidade, cidade) VALUES ("Rua dos Vinhos",42,3678,584,"Gaia","Porto");
+INSERT INTO Morada (rua, nPorta, cp4, cp3, localidade, cidade) VALUES ("Rua dos Violinos",65,2970,385,"Cascais","Lisboa");
+INSERT INTO Morada (rua, nPorta, cp4, cp3, localidade, cidade) VALUES ("Rua do Chão",54,1087,052,"Mealhada","Leiria");
+
+
+INSERT INTO utilizador (DataNasc, Moradaid_morada, email, genero, nif, nome, password, tipo_utilizadorid) 
+VALUES ('1994-09-25', 1, 'duarte@gmail.com', 'M', 123456787, 'Duarte', 'default', 1);
+INSERT INTO utilizador (DataNasc, Moradaid_morada, email, genero, nif, nome, password, tipo_utilizadorid) 
+VALUES ('1999-04-12', 3, 'jose@gmail.com', 'M', 123456799, 'José', 'default', 1);
+INSERT INTO utilizador (DataNasc, Moradaid_morada, email, genero, nif, nome, password, tipo_utilizadorid) 
+VALUES ('1999-05-15', 2, 'andreia@gmail.com', 'M', 123456788, 'Andreia', 'default', 1);
+
+INSERT INTO Report (descricao, utilizadorid, data, imagem) VALUES ("Utilizadores", 2, "2022-12-25","");
+INSERT INTO Report (descricao, utilizadorid, data, imagem) VALUES ("lugar", 2, "2022-10-17","");
+INSERT INTO Report (descricao, utilizadorid, data, imagem) VALUES ("matricula", 2, "2022-09-12","");
+
+INSERT INTO Mensagem_admin (descricao, data) VALUES ("Olá! A que horas fecham o parque?",2022-12-14);
+INSERT INTO Mensagem_admin (descricao, data) VALUES ("Há possibilidade de reservar lugar?",2022-12-15);
+INSERT INTO Mensagem_admin (descricao, data) VALUES ("Posso estacionar ao fim-de-semana?",2022-12-26);
+INSERT INTO Mensagem_admin (descricao, data) VALUES ("Otimas instalcoes. Parabens!",2022-12-24);
+
+INSERT INTO utilizador_Mensagem (utilizadorid,Mensagemid_mensagem) VALUES (1,1);
+INSERT INTO utilizador_Mensagem (utilizadorid,Mensagemid_mensagem) VALUES (2,2);
+INSERT INTO utilizador_Mensagem (utilizadorid,Mensagemid_mensagem) VALUES (1,3);
+
+INSERT INTO utilizador_Tipo_contacto (utilizadorid, Tipo_contacton_contacto, contacto) VALUES (2,1,"nome@email.com");
+INSERT INTO utilizador_Tipo_contacto (utilizadorid, Tipo_contacton_contacto, contacto) VALUES (3,1,"nome@email.com");
+INSERT INTO utilizador_Tipo_contacto (utilizadorid, Tipo_contacton_contacto, contacto) VALUES (2,2,"912345678");
+
+INSERT INTO utilizador_Tipo_veiculos (utilizadorid, Tipo_veiculosid_veiculo, matricula) 
+VALUES (2,1,"10-AE-25");
+INSERT INTO utilizador_Tipo_veiculos (utilizadorid, Tipo_veiculosid_veiculo, matricula) 
+VALUES (3,2,"10-BN-25");
+INSERT INTO utilizador_Tipo_veiculos (utilizadorid, Tipo_veiculosid_veiculo, matricula) 
+VALUES (1,3,"AQ-22-WQ");
+
+INSERT INTO lugar (setorid_setor, tipo_lugarn_tipo, estado)
+VALUES (1,1,0);
+INSERT INTO lugar (setorid_setor, tipo_lugarn_tipo, estado, utilizador_Tipo_veiculosmatricula)
+VALUES (1,2,1,"10-AE-25");
+INSERT INTO lugar (setorid_setor, tipo_lugarn_tipo, estado)
+VALUES (2,2,0);
+
+INSERT INTO Historico (hora_entrada, hora_saida, lugarnumero_lugar)
+VALUES ('2022-05-12 12:00:00','2022-05-12 12:30:00',1);
+INSERT INTO Historico (dia, hora_entrada, hora_saida, lugarnumero_lugar)
+VALUES ('2022-06-01 09:00:00','2022-06-01 13:30:00',2);
+INSERT INTO Historico (dia, hora_entrada, hora_saida, lugarnumero_lugar)
+VALUES ('2022-10-22 12:00:00','2022-10-22 18:30:00',2);
+
+INSERT INTO utilizador_Historico (utilizadorid, Historicoid)
+VALUES (1,1);
+INSERT INTO utilizador_Historico (utilizadorid, Historicoid)
+VALUES (1,2);
+INSERT INTO utilizador_Historico (utilizadorid, Historicoid)
+VALUES (2,2);
+
+INSERT INTO perfil_especial(nome,matricula, contacto, Tipo_veiculosid_veiculo) VALUES ("Maria Pires", "65-TE-85", 965874123, 1);
+INSERT INTO perfil_especial(nome,matricula, contacto, Tipo_veiculosid_veiculo) VALUES ("Andreia Pires", "QW-52FR", "andreia@email.com", 2);
+
+
+/* PARA APAGAR AS TABELAS E FAZER RESET OS ID's*/ 
+DELETE FROM utilizador_Historico;
+DELETE FROM Historico;
+DELETE FROM lugar;
+DELETE FROM utilizador_Tipo_veiculos;
+DELETE FROM utilizador_Tipo_contacto;
+DELETE FROM utilizador_Mensagem;
+DELETE FROM Mensagem_admin;
+DELETE FROM Report;
+DELETE FROM tipo_lugar;
+DELETE FROM setor;
+DELETE FROM Tipo_veiculos;
+DELETE FROM Tipo_contacto;
+DELETE FROM utilizador;
+DELETE FROM Morada;
+DELETE FROM tipo_utilizador;
+DELETE FROM perfil_especial;
+
+ALTER TABLE Tipo_contacto AUTO_INCREMENT = 1;
+ALTER TABLE utilizador_Historico AUTO_INCREMENT = 1;
+ALTER TABLE Historico AUTO_INCREMENT = 1;
+ALTER TABLE lugar AUTO_INCREMENT = 1;
+ALTER TABLE utilizador_Tipo_veiculos AUTO_INCREMENT = 1;
+ALTER TABLE utilizador_Tipo_contacto AUTO_INCREMENT = 1;
+ALTER TABLE utilizador_Mensagem AUTO_INCREMENT = 1;
+ALTER TABLE Mensagem_admin AUTO_INCREMENT = 1;
+ALTER TABLE Report AUTO_INCREMENT = 1;
+ALTER TABLE tipo_lugar AUTO_INCREMENT = 1;
+ALTER TABLE setor AUTO_INCREMENT = 1;
+ALTER TABLE Tipo_veiculos AUTO_INCREMENT = 1;
+ALTER TABLE utilizador AUTO_INCREMENT = 1;
+ALTER TABLE Morada AUTO_INCREMENT = 1;
+ALTER TABLE tipo_utilizador AUTO_INCREMENT = 1;
+ALTER TABLE perfil_especial AUTO_INCREMENT = 1;
+*/
