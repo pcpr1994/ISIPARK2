@@ -95,7 +95,7 @@ namespace ISIParkAPI.Controllers
 
             user = await _userRepository.GetUserByEmail(request.Email);
 
-            if((user.Email == "admin") && (user.Password == "admin"))
+            if((user.Email == "admin@ipca.pt") && (user.Password == "admin"))
             {
                 string tokenA = CreateTokenAdmin(user);
                 return Ok(tokenA);
