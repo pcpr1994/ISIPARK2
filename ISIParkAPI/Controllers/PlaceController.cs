@@ -18,7 +18,7 @@ namespace ISIParkAPI.Controllers
     /// <summary>
     /// Class controller of Place, this class have all routes of PlaceRepository methods
     /// </summary>
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     [Route("api/[controller]")]
     [ApiController]
     public class PlaceController : ControllerBase
@@ -106,6 +106,19 @@ namespace ISIParkAPI.Controllers
             await _placeRepository.DeletePlace(new Place { Numero_lugar = numero });
 
             return NoContent();
+        }
+
+        /// <summary>
+        /// Route to delete a place from database, this method uses a http delete
+        /// </summary>
+        /// <param name="Setor"></param>
+        /// <param name="TipoLugar"></param>
+        /// <returns></returns>
+        [HttpGet("{Setor}/{TipoLugar}")]
+        public async Task<IActionResult> GetPlaceSectorType(string Setor, string TipoLugar)
+        {
+            return Ok(await _placeRepository.GetPlaceSectorType(Setor, TipoLugar));
+
         }
     }
 }

@@ -11,6 +11,7 @@ using Dapper;
 using ISIParkAPI.Data.Repositories.Interfaces;
 using ISIParkAPI.Model;
 using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -66,7 +67,7 @@ namespace ISIParkAPI.Data.Repositories
             var db = dbConnection();
             var sql = @"SELECT numero_lugar, setorid_setor, tipo_lugarn_tipo, estado, utilizador_Tipo_veiculosmatricula
                         FROM lugar
-                        WHERE id = @ID";
+                        WHERE numero_lugar = @ID";
 
             return await db.QueryFirstOrDefaultAsync<Place>(sql, new { ID = id });
         }
@@ -133,6 +134,24 @@ namespace ISIParkAPI.Data.Repositories
                         WHERE numero_lugar = @Numero_lugar";
             var result = await db.ExecuteAsync(sql, new { Numero_lugar = place.Numero_lugar });
             return result > 0;
+        }
+
+        public async Task<int> GetPlaceSectorType(string Setor, string TipoLugar)
+        {
+            var db = dbConnection();    
+            var sql = @"SELECT COUNT(l.estado) as num
+                        FROM lugar l
+                        INNER JOIN setor s 
+                            ON l.setorid_setor = s.id_setor 
+                        INNER JOIN tipo_lugar t
+                            ON t.n_tipo = l.tipo_lugarn_tipo 
+                        WHERE l.estado = 0
+                            AND s.setor = @Setor
+                            AND t.descricao = @TipoLugar";
+            int result = await db.QueryFirstOrDefaultAsync<int>(sql, new { Setor = Setor, TipoLugar = TipoLugar });
+
+
+            return result;
         }
 
     }
