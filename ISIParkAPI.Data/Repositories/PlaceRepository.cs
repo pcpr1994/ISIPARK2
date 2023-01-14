@@ -154,5 +154,30 @@ namespace ISIParkAPI.Data.Repositories
             return result;
         }
 
+        public async Task<string> GetSetorUser(int Userid)
+        {
+            var db = dbConnection();
+            var sql = @"SELECT a.setor 
+                        FROM (
+                            SELECT aux.setor, max(RD) as numax
+                            FROM (
+                                SELECT s.setor, COUNT(s.setor) AS RD
+                                FROM utilizador_Historico uh
+                                INNER JOIN Historico h 
+                                ON h.ID = uh.Historicoid
+                                INNER JOIN lugar l
+                                ON l.numero_lugar = h.lugarnumero_lugar 
+                                INNER JOIN setor s
+                                ON s.id_setor = l.setorid_setor 
+                                WHERE uh.utilizadorid = @Userid
+                                GROUP BY s.setor 
+                                ) aux
+                            ) a";
+            string result = await db.QueryFirstOrDefaultAsync<string>(sql, new { Userid = Userid});
+
+
+            return result;
+        }
+
     }
 }

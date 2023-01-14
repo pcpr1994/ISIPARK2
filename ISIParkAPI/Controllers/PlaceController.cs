@@ -120,5 +120,17 @@ namespace ISIParkAPI.Controllers
             return Ok(await _placeRepository.GetPlaceSectorType(Setor, TipoLugar));
 
         }
+
+        /// <summary>
+        /// Route to delete a place from database, this method uses a http delete
+        /// </summary>
+        /// <param name="Userid"></param>
+        /// <returns></returns>
+        [HttpGet("Setor/{Userid}")]
+        public async Task<IActionResult> GetSetorUser(int Userid)
+        {
+            return Ok(await _placeRepository.GetSetorUser(Userid));
+
+        }
     }
 }
