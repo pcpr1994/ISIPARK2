@@ -136,20 +136,39 @@ namespace ISIParkAPI.Data.Repositories
             return result > 0;
         }
 
-        public async Task<int> GetPlaceSectorType(string Setor, string TipoLugar)
+        public async Task<IEnumerable<SetorType>> GetPlaceSectorType()
         {
             var db = dbConnection();    
-            var sql = @"SELECT COUNT(l.estado) as num
+            var sql = @"SELECT setor, descricao, COUNT(l.estado) AS num 
                         FROM lugar l
                         INNER JOIN setor s 
-                            ON l.setorid_setor = s.id_setor 
+                        ON l.setorid_setor = s.id_setor 
                         INNER JOIN tipo_lugar t
-                            ON t.n_tipo = l.tipo_lugarn_tipo 
+                        ON t.n_tipo = l.tipo_lugarn_tipo 
                         WHERE l.estado = 0
-                            AND s.setor = @Setor
-                            AND t.descricao = @TipoLugar";
-            int result = await db.QueryFirstOrDefaultAsync<int>(sql, new { Setor = Setor, TipoLugar = TipoLugar });
+                        GROUP BY setor, descricao";
+            object setor = null;
+            object descricao = null;
+            object num = null;
+            var result = await db.QueryAsync<SetorType>(sql, new { });
 
+            var lista = new List<ShowSetor>();
+
+            foreach (SetorType val in result)
+            {
+                Console.WriteLine(val.setor);
+                Console.WriteLine(val.descricao);
+                Console.WriteLine(val.num);
+                /*
+                if (lista.Add(new ShowSetor(setor)))
+                {
+
+                }*/
+
+            }
+
+            Console.WriteLine("TEST");
+            Console.WriteLine(result.ToString());
 
             return result;
         }

@@ -11,6 +11,8 @@ using ISIParkAPI.Data.Repositories.Interfaces;
 using ISIParkAPI.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System;
 using System.Threading.Tasks;
 
 namespace ISIParkAPI.Controllers
@@ -111,13 +113,11 @@ namespace ISIParkAPI.Controllers
         /// <summary>
         /// Route to delete a place from database, this method uses a http delete
         /// </summary>
-        /// <param name="Setor"></param>
-        /// <param name="TipoLugar"></param>
         /// <returns></returns>
-        [HttpGet("{Setor}/{TipoLugar}")]
-        public async Task<IActionResult> GetPlaceSectorType(string Setor, string TipoLugar)
+        [HttpGet("SetorType")]
+        public async Task<IEnumerable<SetorType>> GetPlaceSectorType()
         {
-            return Ok(await _placeRepository.GetPlaceSectorType(Setor, TipoLugar));
+            return await _placeRepository.GetPlaceSectorType();
 
         }
 
