@@ -28,5 +28,40 @@ namespace ISIParkAPI.Model
         /// Tipo_veiculosid_veiculo is a variable that saves the vehicle type id
         /// </summary>
         public string reduce_mob { get; set; }
+
+        public ShowSetor()
+        {
+        }
+
+        public ShowSetor(string setor, string normal, string eletrico, string motorcycle, string reduce_mob)
+        {
+            this.setor = setor;
+            this.normal = normal;
+            this.eletrico = eletrico;
+            this.motorcycle = motorcycle;
+            this.reduce_mob = reduce_mob;
+        }
+
+        public void addInfo(string descricao, int num)
+        {
+            if (descricao == "Electric")
+            {
+                this.eletrico = descricao + ": " + num;
+            }
+            if (descricao == "MotorCycle")
+            {
+                this.motorcycle = descricao + ": " + num;
+            }
+            if (descricao == "Normal")
+            {
+                this.normal = descricao + ": " + num;
+            }
+            if (descricao == "R.Mobility")
+            {
+                this.reduce_mob = descricao + ": " + num;
+            }
+        }
+
+
     }
 }

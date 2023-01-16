@@ -13,6 +13,8 @@ using ISIParkAPI.Model;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace ISIParkAPI.Data.Repositories
@@ -136,7 +138,7 @@ namespace ISIParkAPI.Data.Repositories
             return result > 0;
         }
 
-        public async Task<IEnumerable<SetorType>> GetPlaceSectorType()
+        public async Task<List<ShowSetor>> GetPlaceSectorType()
         {
             var db = dbConnection();    
             var sql = @"SELECT setor, descricao, COUNT(l.estado) AS num 
@@ -147,30 +149,37 @@ namespace ISIParkAPI.Data.Repositories
                         ON t.n_tipo = l.tipo_lugarn_tipo 
                         WHERE l.estado = 0
                         GROUP BY setor, descricao";
-            object setor = null;
-            object descricao = null;
-            object num = null;
-            var result = await db.QueryAsync<SetorType>(sql, new { });
 
-            var lista = new List<ShowSetor>();
 
-            foreach (SetorType val in result)
+            IEnumerable<SetorType> result = await db.QueryAsync<SetorType>(sql, new { });
+
+            var db1 = dbConnection();
+            var sql1 = @"SELECT DISTINCT setor FROM setor ";
+
+            IEnumerable<string> listasetores = await db1.QueryAsync<string>(sql1);
+
+            List<ShowSetor> infosetores = new List<ShowSetor>();
+
+            foreach(string ls in listasetores)
             {
-                Console.WriteLine(val.setor);
-                Console.WriteLine(val.descricao);
-                Console.WriteLine(val.num);
-                /*
-                if (lista.Add(new ShowSetor(setor)))
+                ShowSetor aux = new ShowSetor();
+
+                aux.setor = "Setor: " + ls;
+
+                foreach (SetorType val in result)
                 {
+                    if (ls == val.setor)
+                    {
+                        aux.addInfo(val.descricao, val.num);
+                    }
+                }
 
-                }*/
-
+                infosetores.Add(aux);
             }
 
             Console.WriteLine("TEST");
-            Console.WriteLine(result.ToString());
 
-            return result;
+            return infosetores;
         }
 
         public async Task<string> GetSetorUser(int Userid)

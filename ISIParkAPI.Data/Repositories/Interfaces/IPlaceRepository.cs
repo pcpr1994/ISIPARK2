@@ -24,7 +24,7 @@ namespace ISIParkAPI.Data.Repositories.Interfaces
         Task<bool> InsertPlace(Place place);
         Task<bool> UpdatePlace(Place place);
         Task<bool> DeletePlace(Place place);
-        Task<IEnumerable<SetorType>> GetPlaceSectorType();
+        Task<List<ShowSetor>> GetPlaceSectorType();
         Task<string> GetSetorUser(int User);
     }
 }
