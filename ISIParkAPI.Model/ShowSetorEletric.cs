@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ISIParkAPI.Model
 {
-    public class ShowSetor
+    public class ShowSetorEletric
     {
 
         public string setor { get; set; }
@@ -16,21 +16,15 @@ namespace ISIParkAPI.Model
 
         public string eletrico { get; set; }
 
-        public string motorcycle { get; set; }
-
-        public string reduce_mob { get; set; }
-
-        public ShowSetor()
+        public ShowSetorEletric()
         {
         }
 
-        public ShowSetor(string setor, string normal, string eletrico, string motorcycle, string reduce_mob)
+        public ShowSetorEletric(string setor, string normal, string eletrico)
         {
             this.setor = setor;
             this.normal = normal;
             this.eletrico = eletrico;
-            this.motorcycle = motorcycle;
-            this.reduce_mob = reduce_mob;
         }
 
         public void addInfo(string descricao, int num)
@@ -39,17 +33,9 @@ namespace ISIParkAPI.Model
             {
                 this.eletrico = descricao + ": " + num;
             }
-            if (descricao == "MotorCycle")
-            {
-                this.motorcycle = descricao + ": " + num;
-            }
             if (descricao == "Normal")
             {
                 this.normal = descricao + ": " + num;
-            }
-            if (descricao == "R.Mobility")
-            {
-                this.reduce_mob = descricao + ": " + num;
             }
         }
 
@@ -63,13 +49,10 @@ namespace ISIParkAPI.Model
             sb.Append(this.normal);
             sb.Append(", ");
             sb.Append(this.eletrico);
-            sb.Append(", ");
-            sb.Append(this.motorcycle);
-            sb.Append(", ");
-            sb.Append(this.reduce_mob);
             sb.Append(")");
 
             return sb.ToString();
         }
     }
 }
+

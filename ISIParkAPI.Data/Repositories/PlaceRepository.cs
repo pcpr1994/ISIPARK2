@@ -139,8 +139,7 @@ namespace ISIParkAPI.Data.Repositories
             return result > 0;
         }
 
-        //public async Task<List<ShowSetor>> GetPlaceSectorType()
-        public async Task<String> GetPlaceSectorType()
+        public async Task<List<ShowSetor>> GetPlaceSectorType()
         {
             var db = dbConnection();    
             var sql = @"SELECT setor, descricao, COUNT(l.estado) AS num 
@@ -177,7 +176,7 @@ namespace ISIParkAPI.Data.Repositories
 
                 infosetores.Add(aux);
             }
-
+            /*
             StringBuilder sb = new StringBuilder();
 
             sb.Append(infosetores[0].ToString());
@@ -187,8 +186,173 @@ namespace ISIParkAPI.Data.Repositories
                 sb.Append(", ");
                 sb.Append(infosetores[i].ToString());
             }
+            */
+            return infosetores;
+        }
 
-            return sb.ToString();
+        public async Task<List<ShowSetorNormal>> GetPlaceSectorTypeNormal()
+        {
+            var db = dbConnection();
+            var sql = @"SELECT setor, descricao, COUNT(l.estado) AS num 
+                        FROM lugar l
+                        INNER JOIN setor s 
+                        ON l.setorid_setor = s.id_setor 
+                        INNER JOIN tipo_lugar t
+                        ON t.n_tipo = l.tipo_lugarn_tipo 
+                        WHERE l.estado = 0
+                        GROUP BY setor, descricao";
+
+            IEnumerable<SetorType> result = await db.QueryAsync<SetorType>(sql, new { });
+
+            var db1 = dbConnection();
+            var sql1 = @"SELECT DISTINCT setor FROM setor ";
+
+            IEnumerable<string> listasetores = await db1.QueryAsync<string>(sql1);
+
+            List<ShowSetorNormal> infosetores = new List<ShowSetorNormal>();
+
+            foreach (string ls in listasetores)
+            {
+                ShowSetorNormal aux = new ShowSetorNormal();
+
+                aux.setor = "Setor: " + ls;
+
+                foreach (SetorType val in result)
+                {
+                    if (ls == val.setor)
+                    {
+                        aux.addInfo(val.descricao, val.num);
+                    }
+                }
+
+                infosetores.Add(aux);
+            }
+
+            return infosetores;
+        }
+
+        public async Task<List<ShowSetorMoto>> GetPlaceSectorTypeMoto()
+        {
+            var db = dbConnection();
+            var sql = @"SELECT setor, descricao, COUNT(l.estado) AS num 
+                        FROM lugar l
+                        INNER JOIN setor s 
+                        ON l.setorid_setor = s.id_setor 
+                        INNER JOIN tipo_lugar t
+                        ON t.n_tipo = l.tipo_lugarn_tipo 
+                        WHERE l.estado = 0
+                        GROUP BY setor, descricao";
+
+            IEnumerable<SetorType> result = await db.QueryAsync<SetorType>(sql, new { });
+
+            var db1 = dbConnection();
+            var sql1 = @"SELECT DISTINCT setor FROM setor ";
+
+            IEnumerable<string> listasetores = await db1.QueryAsync<string>(sql1);
+
+            List<ShowSetorMoto> infosetores = new List<ShowSetorMoto>();
+
+            foreach (string ls in listasetores)
+            {
+                ShowSetorMoto aux = new ShowSetorMoto();
+
+                aux.setor = "Setor: " + ls;
+
+                foreach (SetorType val in result)
+                {
+                    if (ls == val.setor)
+                    {
+                        aux.addInfo(val.descricao, val.num);
+                    }
+                }
+
+                infosetores.Add(aux);
+            }
+
+            return infosetores;
+        }
+
+        public async Task<List<ShowSetorEletric>> GetPlaceSectorTypeEletric()
+        {
+            var db = dbConnection();
+            var sql = @"SELECT setor, descricao, COUNT(l.estado) AS num 
+                        FROM lugar l
+                        INNER JOIN setor s 
+                        ON l.setorid_setor = s.id_setor 
+                        INNER JOIN tipo_lugar t
+                        ON t.n_tipo = l.tipo_lugarn_tipo 
+                        WHERE l.estado = 0
+                        GROUP BY setor, descricao";
+
+            IEnumerable<SetorType> result = await db.QueryAsync<SetorType>(sql, new { });
+
+            var db1 = dbConnection();
+            var sql1 = @"SELECT DISTINCT setor FROM setor ";
+
+            IEnumerable<string> listasetores = await db1.QueryAsync<string>(sql1);
+
+            List<ShowSetorEletric> infosetores = new List<ShowSetorEletric>();
+
+            foreach (string ls in listasetores)
+            {
+                ShowSetorEletric aux = new ShowSetorEletric();
+
+                aux.setor = "Setor: " + ls;
+
+                foreach (SetorType val in result)
+                {
+                    if (ls == val.setor)
+                    {
+                        aux.addInfo(val.descricao, val.num);
+                    }
+                }
+
+                infosetores.Add(aux);
+            }
+
+            return infosetores;
+        }
+
+
+        public async Task<List<ShowSetorReduceMob>> GetPlaceSectorTypeReduceMob()
+        {
+            var db = dbConnection();
+            var sql = @"SELECT setor, descricao, COUNT(l.estado) AS num 
+                        FROM lugar l
+                        INNER JOIN setor s 
+                        ON l.setorid_setor = s.id_setor 
+                        INNER JOIN tipo_lugar t
+                        ON t.n_tipo = l.tipo_lugarn_tipo 
+                        WHERE l.estado = 0
+                        GROUP BY setor, descricao";
+
+            IEnumerable<SetorType> result = await db.QueryAsync<SetorType>(sql, new { });
+
+            var db1 = dbConnection();
+            var sql1 = @"SELECT DISTINCT setor FROM setor ";
+
+            IEnumerable<string> listasetores = await db1.QueryAsync<string>(sql1);
+
+            List<ShowSetorReduceMob> infosetores = new List<ShowSetorReduceMob>();
+
+            foreach (string ls in listasetores)
+            {
+                ShowSetorReduceMob aux = new ShowSetorReduceMob();
+
+                aux.setor = "Setor: " + ls;
+
+                foreach (SetorType val in result)
+                {
+                    if (ls == val.setor)
+                    {
+                        aux.addInfo(val.descricao, val.num);
+                    }
+                }
+
+                infosetores.Add(aux);
+            }
+
+            return infosetores;
         }
 
         public async Task<string> GetSetorUser(int Userid)

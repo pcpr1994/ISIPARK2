@@ -115,9 +115,37 @@ namespace ISIParkAPI.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet("SetorType")]
-        public async Task<String> GetPlaceSectorType()
+        public async Task<List<ShowSetor>> GetPlaceSectorType()
         {
             return await _placeRepository.GetPlaceSectorType();
+
+        }
+
+        [HttpGet("SetorTypeNormal")]
+        public async Task<List<ShowSetorNormal>> GetPlaceSectorTypeNormal()
+        {
+            return await _placeRepository.GetPlaceSectorTypeNormal();
+
+        }
+
+        [HttpGet("SetorTypeMoto")]
+        public async Task<List<ShowSetorMoto>> GetPlaceSectorTypeMoto ()
+        {
+            return await _placeRepository.GetPlaceSectorTypeMoto();
+
+        }
+
+        [HttpGet("SetorTypeEletric")]
+        public async Task<List<ShowSetorEletric>> GetPlaceSectorTypeEletric()
+        {
+            return await _placeRepository.GetPlaceSectorTypeEletric();
+
+        }
+
+        [HttpGet("SetorTypeReduceMob")]
+        public async Task<List<ShowSetorReduceMob>> GetPlaceSectorTypeReduceMob()
+        {
+            return await _placeRepository.GetPlaceSectorTypeReduceMob();
 
         }
 
