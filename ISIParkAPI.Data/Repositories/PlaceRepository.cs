@@ -15,6 +15,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace ISIParkAPI.Data.Repositories
@@ -138,7 +139,8 @@ namespace ISIParkAPI.Data.Repositories
             return result > 0;
         }
 
-        public async Task<List<ShowSetor>> GetPlaceSectorType()
+        //public async Task<List<ShowSetor>> GetPlaceSectorType()
+        public async Task<String> GetPlaceSectorType()
         {
             var db = dbConnection();    
             var sql = @"SELECT setor, descricao, COUNT(l.estado) AS num 
@@ -149,7 +151,6 @@ namespace ISIParkAPI.Data.Repositories
                         ON t.n_tipo = l.tipo_lugarn_tipo 
                         WHERE l.estado = 0
                         GROUP BY setor, descricao";
-
 
             IEnumerable<SetorType> result = await db.QueryAsync<SetorType>(sql, new { });
 
@@ -177,9 +178,17 @@ namespace ISIParkAPI.Data.Repositories
                 infosetores.Add(aux);
             }
 
-            Console.WriteLine("TEST");
+            StringBuilder sb = new StringBuilder();
 
-            return infosetores;
+            sb.Append(infosetores[0].ToString());
+
+            for (int i = 1; i < infosetores.Count(); i++)
+            {
+                sb.Append(", ");
+                sb.Append(infosetores[i].ToString());
+            }
+
+            return sb.ToString();
         }
 
         public async Task<string> GetSetorUser(int Userid)
