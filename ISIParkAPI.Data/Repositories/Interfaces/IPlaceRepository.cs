@@ -29,6 +29,6 @@ namespace ISIParkAPI.Data.Repositories.Interfaces
         Task<List<ShowSetorMoto>> GetPlaceSectorTypeMoto();
         Task<List<ShowSetorEletric>> GetPlaceSectorTypeEletric();
         Task<List<ShowSetorReduceMob>> GetPlaceSectorTypeReduceMob();
-        Task<string> GetSetorUser(int User);
+        Task<BetterSetor> GetSetorUser(int User);
     }
 }

@@ -355,7 +355,7 @@ namespace ISIParkAPI.Data.Repositories
             return infosetores;
         }
 
-        public async Task<string> GetSetorUser(int Userid)
+        public async Task<BetterSetor> GetSetorUser(int Userid)
         {
             var db = dbConnection();
             var sql = @"SELECT a.setor 
@@ -374,7 +374,7 @@ namespace ISIParkAPI.Data.Repositories
                                 GROUP BY s.setor 
                                 ) aux
                             ) a";
-            string result = await db.QueryFirstOrDefaultAsync<string>(sql, new { Userid = Userid});
+            BetterSetor result = await db.QueryFirstOrDefaultAsync<BetterSetor>(sql, new { Userid = Userid});
 
 
             return result;

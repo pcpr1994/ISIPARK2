@@ -14,8 +14,17 @@ namespace ISIParkAPI.Model
 
         public string normal { get; set; }
 
+        public string eletrico { get; set; }
+
+        public string motorcycle { get; set; }
+
+        public string reduce_mob { get; set; }
+
         public ShowSetorNormal()
         {
+            this.eletrico = "";
+            this.motorcycle = "";
+            this.reduce_mob = "";
         }
 
         public ShowSetorNormal(string setor, string normal)
