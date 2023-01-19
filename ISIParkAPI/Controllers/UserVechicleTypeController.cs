@@ -11,6 +11,7 @@ using ISIParkAPI.Data.Repositories.Interfaces;
 using ISIParkAPI.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace ISIParkAPI.Controllers
@@ -18,7 +19,7 @@ namespace ISIParkAPI.Controllers
     /// <summary>
     /// Class controller of UserVechicleType, this class have all routes of UserVechicleTypeRepository methods's
     /// </summary>
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class UserVechicleTypeController : ControllerBase
@@ -54,9 +55,9 @@ namespace ISIParkAPI.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetUserVechicleTypeID(int id)
+        public async Task<IEnumerable<VehiclesByUsers>> GetUserVechicleTypeID(int id)
         {
-            return Ok(await _userVechicleTypeRepository.GetUserVechicleTypeID(id));
+            return await _userVechicleTypeRepository.GetUserVechicleTypeID(id);
         }
 
         /// <summary>
