@@ -109,5 +109,18 @@ namespace ISIParkAPI.Controllers
             return NoContent();
         }
 
+
+        /// <summary>
+        /// Route to delete a vehicle from a database user, this method uses an http delete
+        /// </summary>
+        /// <param name="plate"></param>
+        /// <returns></returns>
+        [HttpDelete("plate/{plate}")]
+        public async Task<IActionResult> DeleteUserVechicleTypeByPlate(string plate)
+        {
+            return Ok(await _userVechicleTypeRepository.DeleteUserVechicleTypeByPlate(plate));
+
+        }
+
     }
 }

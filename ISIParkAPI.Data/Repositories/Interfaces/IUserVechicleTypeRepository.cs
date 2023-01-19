@@ -23,5 +23,6 @@ namespace ISIParkAPI.Data.Repositories.Interfaces
         Task<bool> InsertUserVechicleType(UserVechicleType userVechicleType);
         Task<bool> UpdateUserVechicleType(UserVechicleType userVechicleType);
         Task<bool> DeleteUserVechicleType(UserVechicleType userVechicleType);
+        Task<bool> DeleteUserVechicleTypeByPlate(string plate);
     }
 }

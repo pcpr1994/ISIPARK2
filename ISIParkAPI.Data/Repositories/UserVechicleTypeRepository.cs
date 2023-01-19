@@ -130,5 +130,24 @@ namespace ISIParkAPI.Data.Repositories
             return result > 0;
         }
 
+        /// <summary>
+        /// This method delete a licence plate the user of database 
+        /// </summary>
+        /// <param name="userVechicleType"></param>
+        /// <returns>True deleted or false</returns>
+        public async Task<bool> DeleteUserVechicleTypeByPlate(string plate)
+        {
+            var db = dbConnection();
+            var sql = @"UPDATE lugar 
+                        SET utilizador_Tipo_veiculosmatricula = null 
+                            , estado = 0
+                        WHERE utilizador_Tipo_veiculosmatricula = @plate;
+
+                        DELETE FROM utilizador_Tipo_veiculos 
+                        WHERE matricula = @plate;";
+            var result = await db.ExecuteAsync(sql, new { plate = plate });
+            return result > 0;
+        }
+
     }
 }
