@@ -18,7 +18,7 @@ namespace ISIParkAPI.Controllers
     /// <summary>
     /// Class controller of UserMessage, this class have all routes of UserMessageRepository methods's
     /// </summary>
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class UserMessageController : ControllerBase
@@ -109,7 +109,16 @@ namespace ISIParkAPI.Controllers
         }
 
 
-
+        /// <summary>
+        /// Route to give only one message the user from database, this method uses a http get
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("admin/{id}")]
+        public async Task<IActionResult> GetUserMessageAdminID(int id)
+        {
+            return Ok(await _userMessageRepository.GetUserMessageAdminID(id));
+        }
 
 
     }

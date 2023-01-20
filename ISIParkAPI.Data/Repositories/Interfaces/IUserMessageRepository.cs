@@ -24,5 +24,6 @@ namespace ISIParkAPI.Data.Repositories.Interfaces
         Task<bool> InsertUserMessage(UserMessage userMessage);
         Task<bool> UpdateUserMessage(UserMessage userMessage);
         Task<bool> DeleteUserMessage(UserMessage userMessage);
+        Task<IEnumerable<AdminNotification>> GetUserMessageAdminID(int utilizadorid);
     }
 }
